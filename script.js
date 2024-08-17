@@ -79,7 +79,7 @@ function operate(a,b,operator){
             return a/b;
              
         case '%'://Modulo operation
-            return b%a;
+            return a%b;
               
         default:
             throw new Error("Invalid operator");
@@ -94,3 +94,19 @@ function Clear() {
     var ev = document.getElementById('res');
     ev.value = ev.value.slice(0, -1);
  }
+
+ // Keypad action
+
+ document.addEventListener('keydown' , function(event){
+    const key = event.key;
+    const validKeys = '0123456789+-*/.%';
+    if(validKeys.includes(key)){
+        Solve(key === '*' ? 'x' : key);
+    }else if(key === 'Enter'){
+        Result();
+    }else if(key === 'Backspace'){
+        Back();
+    }else if(key.toLowerCase() === 'c'){
+        Clear();
+    }
+ });
