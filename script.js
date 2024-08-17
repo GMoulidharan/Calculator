@@ -98,6 +98,7 @@ function Clear() {
  // Keypad action
 
  document.addEventListener('keydown' , function(event){
+    event.preventDefault(); //Prevent Default action[duplication]
     const key = event.key;
     const validKeys = '0123456789+-*/.%';
     if(validKeys.includes(key)){
