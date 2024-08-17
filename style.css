@@ -49,3 +49,7 @@ form .display input{
 form input.equal{
     width: 145px;
 }
+
+form input.op{
+    color: aqua;
+}
