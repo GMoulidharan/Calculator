@@ -88,7 +88,7 @@ function operate(a, b, operator) {
     }
 }
 
-function clear() {
+function clearDisplay() {
     var inp = document.getElementById('res');
     inp.value = '';
 }
@@ -110,6 +110,6 @@ document.addEventListener('keydown', function (event) {
     } else if (key === 'Backspace') {
         back();
     } else if (key.toLowerCase() === 'c') {
-        clear();
+        clearDisplay();
     }
 });
