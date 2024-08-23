@@ -1,36 +1,38 @@
-function Solve(val) {
-    var v = document.getElementById('res');
+function solve(val) {
+    const v = document.getElementById('res');
     v.value += val;
- }
+}
 
-function Result(){
-    var input = document.getElementById('res').value;
+function result() {//todo: rename
+    let input = document.getElementById('res').value;
 
     //replace x with '*' and removing space in the input
     input = input.replace(/x/g, '*').replace(/\s+/g, '');
 
+    let output = ''
     try {
-        var result = calculate(input);
-        document.getElementById('res').value = result;
-     } catch (error) {
-        document.getElementById('res').value = 'Error';
-     }
+        output = calculate(input);
+    } catch (error) {
+        output = 'Error';
+    } finally {
+        document.getElementById('res').value = output
+    }
 }
 
-function calculate(expression){
+function calculate(expression) {
     let operators = [];
     let operands = [];
-    let num ='';
-
+    let num = '';
+9
     for (let index = 0; index < expression.length; index++) {
         let char = expression[index];
-        
-        if(isDigit(char) || char === '.'){
-            num +=char;
-        }else if(isOperator(char)){
+
+        if (isDigit(char) || char === '.') {
+            num += char;
+        } else if (isOperator(char)) {
             operands.push(parseFloat(num));
             operators.push(char);
-            num ='';
+            num = '';
         }
     }
     operands.push(parseFloat(num));
@@ -38,76 +40,76 @@ function calculate(expression){
     //multiplication and division First
 
     for (let index = 0; index < operators.length; index++) {
-            if(operators[index] === '*' || operators[index] === '/'){
-                let result = operate(operands[index] ,operands[index+1],operators[index]);
-                operands.splice(index, 2, result);
-                operators.splice(index, 1);
-                index--;
-            }
+        if (operators[index] === '*' || operators[index] === '/') {
+            let result = operate(operands[index], operands[index + 1], operators[index]);
+            operands.splice(index, 2, result);
+            operators.splice(index, 1);
+            index--;
+        }
     }
 
     //Addition and subraction
 
     let result = operands[0];
     for (let index = 0; index < operators.length; index++) {
-        result = operate(result,operands[index+1],operators[index]);        
+        result = operate(result, operands[index + 1], operators[index]);
     }
     return result;
 
 }
 
-function isDigit(char){
+function isDigit(char) {
     return /\d/.test(char);
 }
 
-function isOperator(char){
-    return['+','-','*','/','%'].includes(char);
+function isOperator(char) {
+    return ['+', '-', '*', '/', '%'].includes(char);
 }
 
-function operate(a,b,operator){
+function operate(a, b, operator) {
     switch (operator) {
         case '+':
-            return a+b;
-        
+            return a + b;
+
         case '-':
-            return a-b;
-            
+            return a - b;
+
         case '*':
-            return a*b;
-            
+            return a * b;
+
         case '/':
-            return a/b;
-             
+            return a / b;
+
         case '%'://Modulo operation
-            return a%b;
-              
+            return a % b;
+
         default:
             throw new Error("Invalid operator");
     }
 }
 
-function Clear() {
+function clear() {
     var inp = document.getElementById('res');
     inp.value = '';
- }
- function Back() {
+}
+function back() {
     var ev = document.getElementById('res');
     ev.value = ev.value.slice(0, -1);
- }
+}
 
- // Keypad action
+// Keypad action
 
- document.addEventListener('keydown' , function(event){
+document.addEventListener('keydown', function (event) {
     event.preventDefault(); //Prevent Default action[duplication]
     const key = event.key;
     const validKeys = '0123456789+-*/.%';
-    if(validKeys.includes(key)){
-        Solve(key === '*' ? 'x' : key);
-    }else if(key === 'Enter'){
-        Result();
-    }else if(key === 'Backspace'){
-        Back();
-    }else if(key.toLowerCase() === 'c'){
-        Clear();
+    if (validKeys.includes(key)) {
+        solve(key === '*' ? 'x' : key);
+    } else if (key === 'Enter') {
+        result();
+    } else if (key === 'Backspace') {
+        back();
+    } else if (key.toLowerCase() === 'c') {
+        clear();
     }
- });
+});
