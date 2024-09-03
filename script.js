@@ -80,8 +80,11 @@ function operate(a, b, operator) {
         case '/':
             return a / b;
 
-        case '%'://Modulo operation
-            return a % b;
+        case '%':
+            if(b === 0){
+                return "Error"
+            }
+            return (a * b) / 100 ;
 
         default:
             throw new Error("Invalid operator");
