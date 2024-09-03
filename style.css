@@ -53,3 +53,42 @@ form input.equal{
 form input.op{
     color: aqua;
 }
+
+/* Responsive adjustments */
+@media (max-width: 770px) {
+    .calculator {
+        width: 100%; 
+        padding: 15px;
+    }
+
+    .calculator form input {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+    }
+
+    form .display input {
+        font-size: 35px;
+    }
+
+    
+}
+
+@media (max-width: 480px) {
+    .calculator {
+        padding: 10px;
+    }
+
+    .calculator form input {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+        margin: 5px;
+    }
+
+    form .display input {
+        font-size: 30px;
+    }
+
+    
+}
